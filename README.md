@@ -1,8 +1,8 @@
 # ⚔️ Dungeon²
 
 ![Status](https://img.shields.io/badge/status-in_development-orange)
-![Engine](https://img.shields.io/badge/engine-Godot_4-478CBF)
-![Language](https://img.shields.io/badge/language-GDScript-blue)
+![Engine](https://img.shields.io/badge/engine-Unity_6-000000)
+![Language](https://img.shields.io/badge/language-C%23-239120)
 ![Genre](https://img.shields.io/badge/genre-Roguelike_|_Turn--Based_|_Dungeon_Crawler-darkred)
 ![Platform](https://img.shields.io/badge/platform-PC_|_Web-lightgrey)
 
@@ -30,11 +30,11 @@
 
 | Layer | Technology |
 | :--- | :--- |
-| **Game Engine** | Godot 4 |
-| **Language** | GDScript |
+| **Game Engine** | Unity 6 |
+| **Language** | C# |
 | **Art Style** | Pixel Art, Top-Down 2D |
 | **Combat** | Turn-Based |
-| **Testing** | GUT (Godot Unit Testing) |
+| **Testing** | Unity Test Framework (NUnit) |
 | **Export Targets** | Windows, macOS, Linux, WebGL |
 
 ---
@@ -44,43 +44,48 @@
 ```
 dungeon-and-dungeon/
 │
-├── autoloads/              # Global singletons (EventBus, CombatSystem, SaveSystem...)
-├── scenes/
-│   ├── boot/
-│   ├── menus/
-│   ├── dungeon/
-│   ├── combat/
-│   ├── entities/
-│   └── ui/
+├── Assets/
+│   ├── _Project/
+│   │   ├── Scripts/
+│   │   │   ├── Core/               # GameManager, EventBus, SaveSystem...
+│   │   │   ├── Components/         # HealthComponent, StatsComponent, AIComponent...
+│   │   │   ├── Combat/             # TurnQueueProcessor, SkillResolver, ActionValidator...
+│   │   │   ├── Generation/         # RoomGraph, RoomPlacer, CurseInjector...
+│   │   │   ├── Entities/           # PartyMember, Enemy, NPC
+│   │   │   ├── UI/                 # HUD, PartyPanel, CombatAnimationPlayer...
+│   │   │   └── Utils/              # RNG, StatFormulas, DataLoader
+│   │   │
+│   │   ├── ScriptableObjects/      # Pure data — .asset files, no logic
+│   │   │   ├── Classes/
+│   │   │   ├── Races/
+│   │   │   ├── Skills/
+│   │   │   ├── Enemies/
+│   │   │   ├── Essences/
+│   │   │   ├── Items/
+│   │   │   ├── Curses/
+│   │   │   ├── Events/
+│   │   │   └── LootTables/
+│   │   │
+│   │   ├── Prefabs/
+│   │   │   ├── Entities/
+│   │   │   ├── UI/
+│   │   │   └── Dungeon/
+│   │   │
+│   │   └── Scenes/
+│   │       ├── Boot.unity
+│   │       ├── MainMenu.unity
+│   │       ├── DungeonWorld.unity
+│   │       └── Combat.unity
+│   │
+│   ├── Sprites/
+│   ├── Tilesets/
+│   ├── Audio/
+│   └── Fonts/
 │
-├── components/             # Reusable node components
-├── data/                   # Pure data — .tres files, no logic
-│   ├── classes/
-│   ├── races/
-│   ├── skills/
-│   ├── enemies/
-│   ├── essences/
-│   ├── items/
-│   ├── curses/
-│   ├── events/
-│   └── loot_tables/
-│
-├── resources/              # Custom Resource class definitions
-├── scripts/
-│   ├── combat/
-│   ├── generation/
-│   ├── ui/
-│   └── utils/
-│
-├── assets/
-│   ├── sprites/
-│   ├── tilesets/
-│   ├── audio/
-│   └── fonts/
-│
-├── tests/
-├── ARCHITECTURE/
-└── project.godot
+├── Packages/
+├── ProjectSettings/
+├── Tests/
+└── ARCHITECTURE/
 ```
 
 ---
@@ -93,12 +98,14 @@ dungeon-and-dungeon/
    cd dungeon-and-dungeon
    ```
 
-2. **Open in Godot**
-   - Download and install [Godot 4](https://godotengine.org/download)
-   - Open the project via `Project > Import` and select the `project.godot` file
+2. **Open in Unity**
+   - Download and install [Unity Hub](https://unity.com/download)
+   - Install **Unity 6** via Unity Hub
+   - Open the project via `Open > Add project from disk`
 
 3. **Run the game**
-   - Press `F5` or click the **Play** button in the Godot editor
+   - Open `Assets/_Project/Scenes/Boot.unity`
+   - Press **Play** in the Unity Editor
 
 ---
 
@@ -107,7 +114,7 @@ dungeon-and-dungeon/
 **Milestone 0 — Foundation**
 - [x] Core concept & game design
 - [x] Architecture planning
-- [ ] Folder structure & autoloads setup
+- [ ] Project structure & core systems setup
 - [ ] Entity + component system
 - [ ] Basic 3-room dungeon (hardcoded)
 - [ ] Basic turn-based combat (no skills)
