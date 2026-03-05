@@ -143,7 +143,7 @@ dungeon-and-dungeon/
 
 ---
 
-## 👥 Team — 302Games
+## 👥 Team — Sullen Studio
 
 | Contributor | Role | GitHub |
 | :--- | :--- | :--- |
